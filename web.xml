@@ -4,13 +4,14 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
          
-    <!--  we've already configured Spring-MVC for you - nothing to do here! -->         
+    <!--  configure Spring-MVC -->         
     <servlet>
        <servlet-name>Dispatcher</servlet-name>
        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
        <load-on-startup>1</load-on-startup>
     </servlet>
   
+  <!-- map what URL patterns the Dispatcher should handle -->
     <servlet-mapping>
        <servlet-name>Dispatcher</servlet-name>
        <url-pattern>*.do</url-pattern>
