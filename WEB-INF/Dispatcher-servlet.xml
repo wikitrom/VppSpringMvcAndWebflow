@@ -11,23 +11,30 @@
 	<import resource="application.xml" />
 
 	<!-- scan for ALL controllers in the application -->
-	<!-- notes:
-		1) For this to work the complete schemaLocaton above is necessary! 
+	<!-- notes: 1) For this to work the complete schemaLocaton above is necessary! 
 		2) In addition the @Controller annotation must be added to each controller 
-		class that are to be detected as a controller.
-		3) For automatic dependency injection to work we also need to add @Autowired
+		class that are to be detected as a controller. 3)
+		For automatic dependency injection to work we also need to add @Autowired
 		to any dependencies used in the controllers. -->
-	<context:component-scan base-package="com.virtualpairprogrammers.control"/>
 
-		<!-- TBR: the bellow configuration is not needed anymore since we now use 
-			Automatic Controller Scanning above -->
-		<!-- <bean name="/viewAllBooks.do" -->
-		<!-- class="com.virtualpairprogrammers.control.ViewAllBooksController"> -->
+	<!-- NOTE for the VPP course only: Using 'request' scope for session management fails 
+		when base-package is set to end with 'control' below. QUICKFIX: I have changed 
+		it to be the full project instead. This is NOT the proper way to do it but 
+		since the class is mixing annotations with xml-configuration I opted for 
+		this quick fix. -->
+	<!-- <context:component-scan base-package="com.virtualpairprogrammers.control" 
+		/> -->
+	<context:component-scan base-package="com.virtualpairprogrammers" />
 
-		<!-- ref is defined in the imported application.xml above -->
+	<!-- TBR: the bellow configuration is not needed anymore since we now use 
+		Automatic Controller Scanning above -->
+	<!-- <bean name="/viewAllBooks.do" -->
+	<!-- class="com.virtualpairprogrammers.control.ViewAllBooksController"> -->
 
-		<!-- <property name="bookService" ref="bookService" /> -->
+	<!-- ref is defined in the imported application.xml above -->
 
-		<!-- </bean> -->
+	<!-- <property name="bookService" ref="bookService" /> -->
+
+	<!-- </bean> -->
 
 </beans>
