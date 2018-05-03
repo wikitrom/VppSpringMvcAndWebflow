@@ -17,7 +17,7 @@
 		
 		<c:out value="${message}"/>
 		
-		<form method="GET" ACTION="<<no action>>">
+		<form method="GET" ACTION="findByAuthor.do">
 			<label>Required Author:</label><input type="TEXT" NAME="AUTHOR"/>
 			<p><input type="SUBMIT" value="Find"/></p>
 		</form>
