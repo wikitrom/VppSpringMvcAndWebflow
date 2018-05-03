@@ -2,6 +2,7 @@ package com.virtualpairprogrammers.control;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,11 +17,12 @@ import com.virtualpairprogrammers.services.BookService;
  *
  */
 @Controller
-@RequestMapping("/addNewBook")     // request action decide witch method the dispatcher should call
+@RequestMapping("/addNewBook") // request action decide witch method the dispatcher should call
 public class CreateBookController {
 
 	@Autowired
 	private BookService bookService;
+//	private Book theBook = new Book();
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView show() {
@@ -28,10 +30,13 @@ public class CreateBookController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView processForm(Book book) {
+	public ModelAndView processForm(Book newBook, Errors e) {
 
-		bookService.registerNewBook(book);
-		return new ModelAndView("/book-added.jsp", "title", book.getTitle());
+		if (e.hasErrors()) {
+			return new ModelAndView("/add-new-book.jsp", "book", newBook);
+		}
+		bookService.registerNewBook(newBook);
+		return new ModelAndView("/book-added.jsp", "title", newBook.getTitle());
 	}
 
 }
