@@ -7,6 +7,12 @@ import org.springframework.validation.Validator;
 
 import com.virtualpairprogrammers.domain.Book;
 
+
+/*
+ * NOT USED - using declarative validation from now on.
+ * 
+ * Kept for reference.
+ */
 @Component
 public class BookValidator implements Validator {
 
