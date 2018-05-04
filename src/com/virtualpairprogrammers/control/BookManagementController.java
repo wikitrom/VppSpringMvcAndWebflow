@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.virtualpairprogrammers.domain.Book;
 import com.virtualpairprogrammers.services.BookService;
+import com.virtualpairprogrammers.views.BooksReportExcel;
 import com.virtualpairprogrammers.views.BooksReportPDF;
 
 @Controller
@@ -24,13 +25,19 @@ public class BookManagementController {
 		return new ModelAndView("/displayAllBooks.jsp", "allBooks", allBooks);
 	}
 
-	// -- alternative allBooks view - PDF (uses http://www.itextpdf.com)
+	// -- alternative allBooks view - PDF (uses https://www.itextpdf.com)
 	@RequestMapping("/viewAllBooksPDF")
 	public ModelAndView viewAllBooksPDF() {
 		List<Book> allBooks = bookService.getEntireCatalogue();
 		return new ModelAndView(new BooksReportPDF(), "allBooks", allBooks);
 	}
 
+	// -- alternative allBooks view - Excel (uses https://poi.apache.org)
+	@RequestMapping("/viewAllBooksExcel")
+	public ModelAndView viewAllBooksExcel() {
+		List<Book> allBooks = bookService.getEntireCatalogue();
+		return new ModelAndView(new BooksReportExcel(), "allBooks", allBooks);
+	}
 
 	@RequestMapping("/findByAuthor")
 	public ModelAndView findByAuthor(@RequestParam("AUTHOR") String author) {
