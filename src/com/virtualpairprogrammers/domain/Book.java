@@ -6,6 +6,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.virtualpairprogrammers.validation.ISBN;
+
 public class Book implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private static int nextId = 1;
@@ -13,7 +15,7 @@ public class Book implements java.io.Serializable {
 
 	// some JSR-303 field validation annotations
 	@NotEmpty
-	@Pattern(regexp = "[0-9]*") // fake validation
+	@ISBN
 	private String isbn;
 
 	@NotEmpty
