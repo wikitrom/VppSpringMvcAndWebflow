@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.virtualpairprogrammers.domain.Book;
 import com.virtualpairprogrammers.services.BookService;
+import com.virtualpairprogrammers.validation.BookValidator;
 
 /**
  * @author User
@@ -22,17 +23,19 @@ public class CreateBookController {
 
 	@Autowired
 	private BookService bookService;
-//	private Book theBook = new Book();
+	@Autowired
+	private BookValidator bookValidator;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)   // === @GetMapping
 	public ModelAndView show() {
 		return new ModelAndView("/add-new-book.jsp", "book", new Book());
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView processForm(Book newBook, Errors e) {
+	@RequestMapping(method = RequestMethod.POST) // === @PostMapping
+	public ModelAndView processForm(Book newBook, Errors error) {
 
-		if (e.hasErrors()) {
+		bookValidator.validate(newBook, error);
+		if (error.hasErrors()) {
 			return new ModelAndView("/add-new-book.jsp", "book", newBook);
 		}
 		bookService.registerNewBook(newBook);
