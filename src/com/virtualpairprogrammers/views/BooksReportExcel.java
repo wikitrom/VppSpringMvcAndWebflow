@@ -15,25 +15,35 @@ import com.virtualpairprogrammers.domain.Book;
 
 public class BooksReportExcel extends AbstractExcelView {
 
-	protected void buildEcelDocument(Map model, HSSFWorkbook wb, HttpServletRequest req, HttpServletResponse resp)
+	protected void buildExcelDocument(Map model, HSSFWorkbook wb, HttpServletRequest req, HttpServletResponse resp)
 			throws Exception {
 
-		HSSFSheet sheet = wb.createSheet("Book Report");
-
 		List<Book> books = (List<Book>) model.get("allBooks");
+
+		HSSFSheet sheet = wb.createSheet("Book Report");
+		HSSFCell cell;
+
+		// Header row
+		cell = getCell(sheet, 0, 0);
+		setText(cell, "Title");
+
+		cell = getCell(sheet, 0, 1);
+		setText(cell, "Author");
+		cell = getCell(sheet, 0, 2);
+		setText(cell, "Price");
 
 		for (int i = 0; i < books.size(); i++) {
 
 			Book next = (Book) books.get(i);
 
-			HSSFCell cell = getCell(sheet, 1 + i, 0);
+			cell = getCell(sheet, 1 + i, 0);
 			setText(cell, next.getTitle());
 
 			cell = getCell(sheet, 1 + i, 1);
 			setText(cell, next.getAuthor());
 
 			cell = getCell(sheet, 1 + i, 2);
-			setText(cell, "" +next.getPrice());
+			setText(cell, "" + next.getPrice());
 
 		}
 
