@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.virtualpairprogrammers.domain.Book;
@@ -41,6 +42,20 @@ public class BookManagementController {
 	public ModelAndView findByAuthor(@RequestParam("AUTHOR") String author) {
 		List<Book> foundBooks = bookService.getAllBooksByAuthor(author);
 		return new ModelAndView("displayAllBooks", "allBooks", foundBooks);
+	}
+
+	// -- AJAX/JSON 'view'
+	// purpose: handle AJAXcall to retrieve partial search results
+	@RequestMapping("/looseSearch")
+	@ResponseBody
+	public List<Book> performLooseSearch(@RequestParam("CHARS") String chars) {
+
+		// limit when to return data - better to let the caller hold back on its
+		// requests to reduce network traffic
+		if (chars.length() < 3) {
+			return null;
+		}
+		return bookService.searchBooksByLooseMatch(chars);
 	}
 
 }
