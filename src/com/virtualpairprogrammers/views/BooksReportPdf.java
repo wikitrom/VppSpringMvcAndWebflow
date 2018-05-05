@@ -13,13 +13,18 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.virtualpairprogrammers.domain.Book;
 
-public class BooksReportPDF extends AbstractPdfView {
+public class BooksReportPdf extends AbstractPdfView {
 
 	protected void buildPdfDocument(Map model, Document doc, PdfWriter writer, HttpServletRequest req,
 			HttpServletResponse resp) throws Exception {
 		List<Book> books = (List<Book>) model.get("allBooks");
 
 		PdfPTable table = new PdfPTable(3);
+
+		// add header row
+		table.addCell("Titel");
+		table.addCell("Author");
+		table.addCell("Price");
 
 		// create table with book data
 		for (Book next : books) {

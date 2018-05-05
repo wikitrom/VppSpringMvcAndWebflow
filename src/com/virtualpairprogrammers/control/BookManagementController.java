@@ -24,10 +24,10 @@ public class BookManagementController {
 	}
 
 	// -- alternative allBooks view - PDF (uses https://www.itextpdf.com)
-	@RequestMapping("/viewAllBooksPDF")
+	@RequestMapping("/viewAllBooksPdf")
 	public ModelAndView viewAllBooksPDF() {
 		List<Book> allBooks = bookService.getEntireCatalogue();
-		return new ModelAndView("bookReportPDF", "allBooks", allBooks);
+		return new ModelAndView("bookReportPdf", "allBooks", allBooks);
 	}
 
 	// -- alternative allBooks view - Excel (uses https://poi.apache.org)

@@ -3,7 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
-
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -21,25 +20,20 @@
 	<import resource="application.xml" />
 
 	<!-- View Resolver - ResourceBundleViewResolver -->
-	<!-- 'basename' value points to where View Resolvers are configured, 
-		e.g. views.properties, located in the WEB-INF directory. -->
-
-	<!-- 
 	<bean id="bundleViewResolver"
 	    class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
 	    <property name="basename" value="views"/>
+	    <property name="order" value="1"/>
 	</bean>
-	 -->
 
 	<!-- View Resolver - UrlBasedViewResolver -->
-	<!-- the 'views'properties file is NOT used in this case  -->
 	<bean id="urlViewResolver"
 	    class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
 	    <property name="prefix" value="/"/>
    	    <property name="suffix" value=".jsp"/>
+ 	   	<property name="order" value="2"/>
 	</bean>
-
 
 	<!--  activate annotation driven validation (JSR-303) -->
 	<mvc:annotation-driven/>
