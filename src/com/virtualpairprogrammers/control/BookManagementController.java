@@ -10,8 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.virtualpairprogrammers.domain.Book;
 import com.virtualpairprogrammers.services.BookService;
-import com.virtualpairprogrammers.views.BooksReportExcel;
-import com.virtualpairprogrammers.views.BooksReportPDF;
 
 @Controller
 public class BookManagementController {
@@ -22,27 +20,27 @@ public class BookManagementController {
 	@RequestMapping("/viewAllBooks")
 	public ModelAndView viewAllBooks() {
 		List<Book> allBooks = bookService.getEntireCatalogue();
-		return new ModelAndView("/displayAllBooks.jsp", "allBooks", allBooks);
+		return new ModelAndView("displayAllBooks", "allBooks", allBooks);
 	}
 
 	// -- alternative allBooks view - PDF (uses https://www.itextpdf.com)
 	@RequestMapping("/viewAllBooksPDF")
 	public ModelAndView viewAllBooksPDF() {
 		List<Book> allBooks = bookService.getEntireCatalogue();
-		return new ModelAndView(new BooksReportPDF(), "allBooks", allBooks);
+		return new ModelAndView("bookReportPDF", "allBooks", allBooks);
 	}
 
 	// -- alternative allBooks view - Excel (uses https://poi.apache.org)
 	@RequestMapping("/viewAllBooksExcel")
 	public ModelAndView viewAllBooksExcel() {
 		List<Book> allBooks = bookService.getEntireCatalogue();
-		return new ModelAndView(new BooksReportExcel(), "allBooks", allBooks);
+		return new ModelAndView("bookReportExcel", "allBooks", allBooks);
 	}
 
 	@RequestMapping("/findByAuthor")
 	public ModelAndView findByAuthor(@RequestParam("AUTHOR") String author) {
 		List<Book> foundBooks = bookService.getAllBooksByAuthor(author);
-		return new ModelAndView("/displayAllBooks.jsp", "allBooks", foundBooks);
+		return new ModelAndView("displayAllBooks", "allBooks", foundBooks);
 	}
 
 }

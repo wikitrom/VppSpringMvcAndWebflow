@@ -32,13 +32,13 @@ public class CartManagementController {
 		Book requiredBook = bookService.getBookById(id);
 
 		cart.addItem(requiredBook);
-		return new ModelAndView("/bookAddedToCart.jsp", "title", requiredBook.getTitle());
+		return new ModelAndView("bookAddedToCart", "title", requiredBook.getTitle());
 	}
 
 	@RequestMapping("/viewCart")
 	public ModelAndView viewCart() {
 		List<Book> cartBooks = cart.getAllItems();
-		return new ModelAndView("/cartContents.jsp", "cart", cartBooks);
+		return new ModelAndView("cartContents", "cart", cartBooks);
 	}
 
 }
